@@ -12,6 +12,8 @@ import { environment } from '../environment/environment';
 export class AppComponent {
   title = 'gui-download-race-rankings';
 
+  processing = false
+
   urlFormControl = new FormControl('', [Validators.required]);
 
   dataToConvert = {
@@ -37,6 +39,8 @@ export class AppComponent {
       return
     }
 
+    this.processing = true
+
     let body = {
       url: this.urlFormControl.value
     }
@@ -56,6 +60,7 @@ export class AppComponent {
         },
         complete: () => {
           console.log('done')
+          this.processing = false
         }
       })
   }

@@ -371,6 +371,10 @@
   </form>
 
   <button mat-button color="primary" class="button-full-width" (click)="downloadData()">Download Data</button>
+
+  <p *ngIf="processing">
+    Processing ...
+  </p>
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
