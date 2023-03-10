@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import csvDownload from 'json-to-csv-export'
-
+import { environment } from '../environment/environment';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +22,11 @@ export class AppComponent {
   }
 
   constructor(private http:HttpClient) {
+    if (environment.production) {
+      console.log("Mode production")
+    } else {
+      console.log("Mode development")
+    }
   }
   
   downloadData() {  
@@ -32,12 +37,26 @@ export class AppComponent {
       return
     }
 
-    this.http.get("https://dummyjson.com/products").subscribe((response: any) => {
-      console.log(response['products'])
-      this.dataToConvert.data = response['products']
+    let body = {
+      url: this.urlFormControl.value
+    }
 
-      console.log(this.dataToConvert)
-      csvDownload(this.dataToConvert)
-    })
+    this.http.post("http://"+ environment.host + ":" + environment.port + "/race/download", body)
+    .subscribe(
+      {
+        next: (data:any) => {
+          console.log(data);
+          this.dataToConvert.data = data;
+          console.log(this.dataToConvert)
+          csvDownload(this.dataToConvert)
+        },
+        error: (e) => {
+          console.log("[ERROR] Requests fail");
+          this.urlFormControl.setErrors({'failRequests': "Fail Requests"})
+        },
+        complete: () => {
+          console.log('done')
+        }
+      })
   }
 }

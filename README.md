@@ -25,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# Docker 
+## Build Docker 
+
+```cmd
+    docker build -t gui-download-race-rankings .
+```
+
+## Run Dokcer
+```cmd
+    docker run -d --rm --name gui-download-race-rankings -p 9001:80 gui-download-race-rankings
+```
