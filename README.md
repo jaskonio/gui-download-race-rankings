@@ -38,3 +38,26 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ```cmd
     docker run -d --rm --name gui-download-race-rankings -p 9001:80 gui-download-race-rankings
 ```
+
+## Remove Image
+
+```cmd
+    docker rmi gui-download-race-rankings
+```
+
+# Docker Compose
+## Build and Run
+
+```cmd
+    docker-compose up -d
+```
+
+## Stop
+```cmd
+    docker-compose stop
+```
+
+## Remove
+```cmd
+    docker-compose rm
+```

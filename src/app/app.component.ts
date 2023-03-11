@@ -24,11 +24,6 @@ export class AppComponent {
   }
 
   constructor(private http:HttpClient) {
-    if (environment.production) {
-      console.log("Mode production")
-    } else {
-      console.log("Mode development")
-    }
   }
   
   downloadData() {  
@@ -45,7 +40,7 @@ export class AppComponent {
       url: this.urlFormControl.value
     }
 
-    this.http.post("http://"+ environment.host + ":" + environment.port + "/race/download", body)
+    this.http.post(environment.api_url, body)
     .subscribe(
       {
         next: (data:any) => {
